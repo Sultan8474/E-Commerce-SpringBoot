@@ -1,0 +1,58 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>User Registration</title>
+<link rel="stylesheet" href="/css/userRegister.css">
+</head>
+<body>
+
+
+
+<!-- Main Container -->
+<div class="register-container">
+
+ <!-- Top Navigation -->
+<h2 class="nav-links">
+    <a href="/userLogin">Login</a>&nbsp;&nbsp;&nbsp;
+    <a href="/">Home</a>&nbsp;&nbsp;&nbsp;
+    <a href="/logout">Logout</a>
+</h2><br><br>
+
+    <!-- Left Side Title -->
+    <div class="left-side">
+        <h1>User Registration</h1>
+        <p>Create your User account t0 purchase product very low price</p>
+    </div>
+
+    <!-- Right Side Form -->
+    <div class="form-box">
+        <form action="userRegForm" method="post">
+
+            <label>Name:</label>
+            <input type="text" name="name" placeholder="Enter your full name" required><br>
+
+            <label>Email:</label>
+            <input type="email" name="email" placeholder="Enter your email" required><br>
+
+            <label>Password:</label>
+            <input type="password" name="pass" placeholder="Enter your password" required><br>
+
+            <label>City:</label>
+            <input type="text" name="city" placeholder="Enter your city" required><br>
+            
+            <label> phone: </label>
+            <input type="number" name="phone" placeholder="Enter your phone number" required><br><br>
+
+            <input type="submit" value="Register">
+
+        </form>
+    </div><br><br>
+   
+    
+
+</div>
+
+</body>
+</html>

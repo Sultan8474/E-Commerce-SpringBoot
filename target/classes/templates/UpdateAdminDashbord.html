@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> UpdateProduct </title>
+ <link rel="stylesheet" href="/css/updateProduct.css">
+
+</head>
+
+<body>
+
+
+<div class="container">
+    <a th:href="@{'/addToCart?name=' + ${p.name} + '&price=' + ${p.price}}">Add to Cart</a>
+
+    <h3>Total: ₹ <span th:text="${total}"></span></h3>
+
+    <a href="/checkout">Proceed to Payment</a>
+</div>
+
+</body>
+</html>

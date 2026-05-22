@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>E-Commerce</title>
+ <link rel="stylesheet" th:href="@{/css/userDashbord.css}">
+</head>
+
+<body>
+<div class="nav-links">
+    
+    <a href="/">Home</a>&nbsp;&nbsp;&nbsp;
+    <form action="/logout" method="get">
+    <button type="submit">Logout</button>
+</form>
+    
+  
+</div><br><br>
+
+<h2>🛒 Product Dashboard</h2>
+
+<div class="nav">
+   
+    <a th:href="@{/cart}">View Cart</a>
+</div>
+
+<!-- SUCCESS -->
+<p th:if="${param.success}" class="success-msg">
+    ✅ Added to cart successfully
+</p>
+
+
+<!-- ERROR -->
+<p th:if="${param.error == 'outofstock'}" class="error-msg">
+    ❌ Product Out of Stock
+</p>
+
+<div class="container">
+
+    <div th:each="p : ${products}" class="card">
+
+        <div class="card-header">
+            <h3 th:text="${p.name}"></h3>
+        </div>
+
+     <div class="card-body">
+
+    <img th:src="${p.image != null and !#strings.isEmpty(p.image)} 
+      ? @{'/images/' + ${p.image}} 
+      : @{/images/default.png}"
+     class="product-img">
+
+    <p class="price">₹ <span th:text="${p.price}"></span></p>
+    <p class="desc" th:text="${p.description}"></p>
+
+    <p class="stock">
+        Stock: <span th:text="${p.quantity}"></span>
+    </p>
+
+    <p th:if="${p.quantity == 0}" class="out">Out of Stock</p>
+
+</div>
+
+        <div class="card-footer">
+
+            <a th:if="${p.quantity > 0}" class="btn cart"
+               th:href="@{/addToCart(id=${p.id})}">
+                🛒 Cart
+            </a>
+
+           
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- PAGINATION -->
+<div class="pagination">
+
+    <!-- PREV -->
+    <a th:if="${currentPage > 0}"
+       th:href="@{/userDashbord(page=${currentPage - 1})}">
+        ⬅ Previous
+    </a>
+
+    <!-- PAGE NUMBERS -->
+    <span th:each="i : ${#numbers.sequence(0, totalPages - 1)}">
+        <a th:href="@{/userDashbord(page=${i})}"
+           th:text="${i + 1}"
+           th:classappend="${i == currentPage} ? 'active'">
+        </a>
+    </span>
+
+    <!-- NEXT -->
+    <a th:if="${currentPage < totalPages - 1}"
+       th:href="@{/userDashbord(page=${currentPage + 1})}">
+       Next ➡
+    </a>
+
+</div>
+
+</body>
+</html>

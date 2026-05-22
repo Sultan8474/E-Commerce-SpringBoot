@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Admin Login</title>
+<link rel="stylesheet" th:href="@{/css/adminLogin.css}">
+</head>
+
+<body>
+
+<div class="nav-links">
+    <a href="/adminLogin">Login</a>&nbsp;&nbsp;&nbsp;
+    <a href="/">Home</a>&nbsp;&nbsp;&nbsp;
+   <a href="/logout">Logout</a>
+  
+</div><br><br>
+
+<div class="container">
+
+
+
+    <!-- LEFT SIDE -->
+    <div class="left">
+        <h1>Welcome </h1><br>
+        <p>  Manage your store, products and orders easily.</p>
+    </div>
+
+    <!-- RIGHT SIDE LOGIN -->
+    <div class="right">
+
+        <div class="login-box">
+
+            <h2>Admin Login</h2>
+
+            <p class="error" th:text="${errMsg}"></p>
+            
+
+            <form action="loginForm" method="post">
+ 
+              Email:  <input type="email" name="email" placeholder="Enter Email" required><br><br>
+
+              Password:  <input type="password" name="pass" placeholder="Enter Password" required>
+                <br><br><br>
+
+                <button  type="submit">Login</button>
+
+            </form><br>
+
+            <p class="register">
+                Don't have an account?
+               &nbsp  &nbsp <a style=" color:red" href="openAdmin">Register</a>
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

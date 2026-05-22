@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Product</title>
+    <link rel="stylesheet" th:href="@{/css/addProduct.css}">
+</head>
+<body>
+
+<h2 th:text="${product.id == null} ? '➕ Add Product' : '✏ Update Product'"></h2>
+
+<div class="form-container">
+   <form action="/save" method="post" enctype="multipart/form-data">
+
+    <!-- ✅ VERY IMPORTANT (for update) -->
+    <input type="hidden" name="id" th:value="${product.id}">
+<!--  <input type="image" name="image" th:value="${product.image}">
+  -->
+  
+    <label>Name:</label>
+    <input type="text" name="name" th:field="${product.name}" placeholder="Enter your name" required>
+
+    <label>Price:</label>
+    <input type="number" name="price" th:field="${product.price}" required>
+
+    <label>Quantity:</label>
+    <input type="number" name="quantity" th:field="${product.quantity}" required>
+
+    <label>Description:</label>
+    <input type="text" name="description" th:field="${product.description}" placeholder="Enter Descriptions" required>
+
+<label>Upload Image</label>
+<input type="file" name="imgFile">
+
+<!--<img th:src="${product.image != null} ?
+@{/images/{img}(img=${product.image})} :
+@{/images/default.png}"
+class="product-img">
+ -->
+ 
+ <img th:if="${product.image != null}"
+     th:src="@{/images/{img}(img=${product.image})}"
+     class="product-img">
+
+     
+    <button type="submit">Save</button>
+</form> 
+</div>
+<a th:href="@{/}" class="back">⬅ Back to Home</a>
+
+</body>
+</html>

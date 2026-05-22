@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>userLogin Page</title>
+<link rel="stylesheet" href="/css/userLogin.css">
+</head>
+<body>
+
+<div class="nav-links">
+   
+    <a href="/">Home</a>&nbsp;&nbsp;&nbsp;
+   <a href="/logout">Logout</a>
+    
+  
+</div><br><br>
+
+<div class="container">
+ <div class="left">
+        <h1>Welcome User </h1><br>
+        <p> this is online store, you can buy product with minimum price</p>
+    </div>
+
+<div class="right">
+
+        <div class="login-box">
+
+            <h2>User Login</h2>
+
+<h2 ><span class="error" th:text="${errMsg}"></span></h2>
+
+<form action="userLoginForm" method="post"> 
+
+
+<label> Email: </label><input type="text" name="email" placeholder="Enter your name" required><br><br>
+<label> Password: </label><input type="password" name="pass" placeholder="Enter your name" required><br><br><br>
+
+
+
+
+<button  type="submit">Login</button>
+
+</form>
+<br><br>
+  <p class="register">
+                Don't have an account?
+               &nbsp  &nbsp <a style=" color:red" href="openUser">Register</a>
+            </p>
+
+        </div>
+</div>
+
+</div>
+</body>
+</html>

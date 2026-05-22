@@ -1,0 +1,99 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Payment</title>
+  <link rel="stylesheet" th:href="@{/css/payment.css}">
+</head>
+
+<body>
+
+<div class="container">
+
+  <h2>💳 Payment</h2>
+  <h2>Total Amount: ₹ <span th:text="${amount}"></span></h2>
+
+  <!-- Hidden fields -->
+  <input type="hidden" id="totalAmount" th:value="${amount}">
+  <input type="hidden" id="orderId"     th:value="${orderId}">
+  <input type="hidden" id="razorpayKey" th:value="${key}">
+
+  <form>
+
+    <input type="hidden" id="email" th:value="${email}">
+    <input type="hidden" id="phoneNumber" th:value="${phoneNumber}">
+    <button type="button" onclick="payNow()">Pay Now</button>
+  </form>
+
+</div>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<script>
+
+function payNow() {
+
+    let email = document.getElementById("email").value;
+    let phoneNumber = document.getElementById("phoneNumber").value;
+    let amount = parseFloat(document.getElementById("totalAmount").value);
+    let orderId = document.getElementById("orderId").value;
+    let key = document.getElementById("razorpayKey").value;
+
+   
+
+    if (!email) {
+        alert("Email not found");
+        return;
+    }
+
+    var options = {
+
+    	    key: key,
+
+    	    amount: Math.round(amount * 100),
+
+    	    currency: "INR",
+
+    	    name: "Sultan Store",
+
+    	    description: "Order Payment",
+
+    	    order_id: orderId,
+
+    	    prefill: {
+    	        name: "Customer",
+    	        email: email,
+    	        contact: phoneNumber
+    	    },
+
+    	    theme: {
+    	        color: "#3399cc"
+    	    },
+
+    	    handler: function (response) {
+
+    	        alert("Payment Successful");
+
+    	        window.location.href =
+    	            "/success?email=" + email +
+    	            "&phoneNumber=" + phoneNumber +
+    	            "&totalAmount=" + amount;
+    	    }
+    	};
+    var rzp = new Razorpay(options);
+
+    rzp.on('payment.failed', function(response) {
+
+        console.log(response);
+
+        alert("Payment Failed: " + response.error.description);
+    });
+
+    rzp.open();
+}
+
+</script>
+
+</body>
+</html>

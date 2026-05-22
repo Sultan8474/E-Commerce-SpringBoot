@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>E-Commerce</title>
+    <link rel="stylesheet" th:href="@{/css/adminDashbord.css}">
+</head>
+
+<body>
+<div class="nav-links">
+   
+    <a href="/">Home</a>&nbsp;&nbsp;&nbsp;
+    <form action="/logout" method="get">
+    <button type="submit">Logout</button>
+</form>
+    
+  
+</div><br><br>
+
+<h2>🛒 Product Dashboard </h2> &nbsp;&nbsp;&nbsp; 	<span><a href="index.html"> Home </a></span>
+
+<div class="nav">
+    <a th:href="@{/add}">Add Product</a>
+    
+</div>
+
+<div class="container">
+
+    <div th:each="p : ${products}" class="card">
+
+        <div class="card-header">
+            <h3 th:text="${p.name}"></h3>
+        </div>
+
+        <div class="card-body">
+      
+<img th:src="${p.image != null} ?
+@{/images/{img}(img=${p.image})} :
+@{/images/default.png}"
+class="product-img">
+     
+            <p class="price">₹ <span th:text="${p.price}"></span></p>
+            <p class="desc" th:text="${p.description}"></p>
+
+           <p class="stock-text">
+    Stock: <span th:text="${p.quantity}"></span>
+</p>
+
+            <p th:if="${p.quantity == 0}" class="out">Out of Stock</p>
+        </div>
+
+        <div class="card-footer">
+
+            <a class="btn stock"
+               th:href="@{/addStock/{id}(id=${p.id})}">
+                ➕ Stock
+            </a>
+
+            <a class="btn update"
+               th:href="@{/edit/{id}(id=${p.id})}">
+                ✏ Update
+            </a>
+
+          <form th:action="@{/delete/{id}(id=${p.id})}" method="post"
+      onsubmit="return confirm('Delete this product?')">
+
+   <button type="submit" class="btn delete">🗑 Delete</button>
+
+</form>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- PAGINATION -->
+<div class="pagination">
+
+<a th:if="${currentPage > 0}"
+   th:href="@{/adminDashbord(page=${currentPage - 1})}">
+   ⬅ Prev
+</a>
+
+<span>Page [[${currentPage + 1}]] / [[${totalPages}]]</span>
+
+<a th:if="${currentPage < totalPages - 1}"
+   th:href="@{/adminDashbord(page=${currentPage + 1})}">
+   Next ➡
+</a>
+
+</div>
+
+</body>
+</html>

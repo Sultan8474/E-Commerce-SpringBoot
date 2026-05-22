@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>My Orders</title>
+    <link rel="stylesheet" th:href="@{/css/order.css}">
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>📦 My Orders</h2>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Amount</th>
+        <th>Status</th>
+         <th>Users</th>
+          <th>Contact Number </th>
+        
+    </tr>
+
+    <tr th:each="order : ${orders}">
+        <td th:text="${order.id}"></td>
+       
+        <td th:text="${order.totalAmount}"></td>
+        <td th:text="${order.status}"
+            th:classappend="${order.status == 'SUCCESS'} ? 'success' : 'failed'">
+        </td>
+         <!-- User Email -->
+        <td th:text="${order.email}"></td>
+         <td th:text="${order.phoneNumber}"></td>
+        
+    </tr>
+</table>
+
+<a href="/" class="btn-home">🏠 Back Home</a>
+
+</div>
+
+</body>
+</html>

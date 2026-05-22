@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Cart</title>
+    <link rel="stylesheet" th:href="@{/css/cart.css}">
+</head>
+<body>
+
+
+<div class="main-wrapper">
+
+<div class="nav-links">
+    
+    <a href="/">Home</a>&nbsp;&nbsp;&nbsp;
+    <form action="/logout" method="get">
+    <button type="submit">Logout</button>
+</form>
+    
+  
+</div><br><br>
+
+    <div class="page-title">
+        <h1>🛒 Shopping Cart</h1>
+        <p>Review your selected products</p>
+    </div>
+
+    <div class="cart-container">
+
+        <div class="cart-card" th:each="c : ${cartItems}">
+
+            <div class="left-section">
+                <img th:src="@{'/images/' + ${c.image}}" class="cart-img">
+
+                <div class="cart-info">
+                    <h3 th:text="${c.productName}"></h3>
+                    <p>Price: ₹ <span th:text="${c.price}"></span></p>
+                    <p>Quantity: <span th:text="${c.quantity}"></span></p>
+                </div>
+            </div>
+
+            <div class="right-section">
+                <a class="btn delete"
+                   th:href="@{/remove/{id}(id=${c.id})}">
+                   Remove
+                </a>
+            </div>
+
+        </div>
+
+        <div class="cart-summary">
+            <h2>Total Amount</h2>
+            <h1>₹ <span th:text="${total}"></span></h1>
+
+            <form action="/checkout" method="get">
+                <input type="hidden" name="total" th:value="${total}">
+                <button class="btn checkout-btn" type="submit">
+                    Proceed to Checkout
+                </button>
+            </form>
+
+            <a class="btn back-btn" th:href="@{/userDashbord}">
+                Continue Shopping
+            </a>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

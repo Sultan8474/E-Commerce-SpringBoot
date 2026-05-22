@@ -1,0 +1,70 @@
+@charset "UTF-8";
+
+/* BODY STYLE */
+body{
+    margin:0;
+    padding:0;
+    height:100vh;
+    font-family: Arial, Helvetica, sans-serif;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background: linear-gradient(-45deg,#667eea,#764ba2,#6dd5ed,#2193b0);
+    background-size:400% 400%;
+    animation: gradientBG 10s ease infinite;
+}
+h1{
+    position:absolute;
+    top:80px;
+    color:white;
+    font-size:40px;
+    letter-spacing:2px;
+}
+
+/* BACKGROUND ANIMATION */
+@keyframes gradientBG{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
+
+/* BUTTON CONTAINER */
+.buttons{
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(10px);
+
+    padding:60px 80px;
+    border-radius:15px;
+
+    display:flex;
+    flex-direction:column;
+    gap:25px;
+
+    box-shadow:0 10px 30px rgba(0,0,0,0.3);
+    text-align:center;
+}
+
+/* BUTTON LINKS */
+.buttons a{
+    text-decoration:none;
+    padding:15px 40px;
+    font-size:20px;
+    font-weight:bold;
+
+    border-radius:30px;
+
+    color:white;
+    background: linear-gradient(135deg,#ff416c,#ff4b2b);
+
+    transition: all 0.3s ease;
+    box-shadow:0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* HOVER EFFECT */
+.buttons a:hover{
+    transform: translateY(-5px) scale(1.05);
+    box-shadow:0 10px 25px rgba(0,0,0,0.4);
+    background: linear-gradient(135deg,#36d1dc,#5b86e5);
+}
